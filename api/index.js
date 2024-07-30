@@ -14,7 +14,7 @@ import  path  from 'path';
 const __dirname=path.resolve();
 
 
-dotenv.config({ path: path.resolve(__dirname, './.env') });
+dotenv.config({ path: "./.env" });
 
 const app = express();
 
@@ -57,11 +57,13 @@ app.get('/api/cookie-tester',(req,res,next)=>{
 })
 app.post('*/upload', upload.fields([{ name: 'product_image', maxCount: 6 }]), uploadOnCloud);
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname,'/client/dist')));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
-});
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname,'client','dist','index.html'))
+})
+
+
 app.use('/api/product', productRoute);
 app.use('/api/user', userRoute);
 app.use('/api/admin',adminRoute)
