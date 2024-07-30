@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 *.env
 *.cloudinary.js
+*.seeds.js
