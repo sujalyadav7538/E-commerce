@@ -11,6 +11,9 @@ import cookieParser from "cookie-parser";
 import cors from 'cors';
 import  path  from 'path';
 
+const __dirname=path.resolve();
+
+
 dotenv.config({ path: path.resolve(__dirname, './.env') });
 
 const app = express();
@@ -18,7 +21,6 @@ const app = express();
 // Connect to MongoDB Atlas
 await DatabaseConnection();
 
-const __dirname=path.resolve();
 
 app.use(express.json());
 app.use(bodyParser.json());
