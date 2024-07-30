@@ -38,11 +38,6 @@ app.use(cors({
     },
     credentials: true  // Enable credentials (cookies, authorization headers, TLS client certificates)
 }));
-app.use(express.static(path.join(__dirname, '../client/dist')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
-});
 
 app.get('/', (req, res) => {
     res.send('hello world');
@@ -62,6 +57,11 @@ app.get('/api/cookie-tester',(req,res,next)=>{
 })
 app.post('*/upload', upload.fields([{ name: 'product_image', maxCount: 6 }]), uploadOnCloud);
 
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
 app.use('/api/product', productRoute);
 app.use('/api/user', userRoute);
 app.use('/api/admin',adminRoute)
