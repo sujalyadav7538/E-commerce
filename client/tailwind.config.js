@@ -6,10 +6,22 @@ export default {
   ],
   theme: {
     extend: {
-      dropShadow:{
-        '3xl':'0 0px 0px rgba(0,0,0,0.94)'
-      }
+      dropShadow: {
+        '3xl': '0 0px 0px rgba(0,0,0,0.94)',
+      },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none',
+        },
+        '.no-scrollbar': {
+          '-ms-overflow-style': 'none', /* for Internet Explorer, Edge */
+          'scrollbar-width': 'none', /* for Firefox */
+        },
+      });
+    },
+  ],
+};

@@ -1,71 +1,151 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { createContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import all_product from './../../public/Assets/all_product';
+import { UserContext } from './userContext';
 
-export const ShopContext=createContext(null);
+export const ShopContext = createContext(null);
 
+const ShopContextProvider = (props) => {
+    const [cartItems, setCartItems] = useState([]);
+    const { currUser } = useContext(UserContext);
 
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                if (!currUser || !currUser._id) return;
 
-const ShopContextProvider=(props)=>{
-    const [cartItems,SetCartItems]=useState([]);
+                const response = await fetch('http://localhost:3000/api/user/cart/get', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ userId: currUser._id })
+                });
 
-    const alterCartValue=(value,id)=>{
-        SetCartItems((prev)=>{
-            const productLocation=prev.findIndex(item=>item.id===id);
-            const products=[...prev];
-            products[productLocation]={
-                ...products[productLocation],
-                cartValue:value
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    console.error("Error fetching cart data:", data.message || response.statusText);
+                    return;
+                }
+
+                if (data.success === false) {
+                    console.log("Empty Cart");
+                    setCartItems([]);
+                } else {
+                    setCartItems(data);
+                }
+            } catch (error) {
+                console.error("Error in fetching cart data:", error);
+            }
+        };
+
+        fetchCart();
+    }, [currUser]);
+
+    const alterCartValue = async(quantity, productId) => {
+            try {
+                const response = await fetch('http://localhost:3000/api/user/cart/update', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ userId: currUser._id ,productId,quantity})
+                });
+    
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    console.error("Error fetching cart data:", data.message || response.statusText);
+                }
+    
+                if (data.success === false) {
+                    console.log("Can't Add Item Inside Cart");
+
+                } else {
+                    setCartItems(data)
+                }
+            } catch (error) {
+                console.log(error.message)
+            }
+            
+        };
+    
+
+    const removeFromCart = async(cartId) => {
+        try {
+            const response= await fetch('http://localhost:3000/api/user/cart/delete',{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({ userId: currUser._id ,cartId})
+
+            })
+            const data = await response.json();
+            if (!response.ok) {
+                console.error("Error fetching cart data:", data.message || response.statusText);
             }
 
-            return products;
-        })
-    }
-    const removeFromCart = (productId) => {
-        SetCartItems((prev) => {
-            // Find the index of the product to be removed
-            const deletedProductIndex = prev.findIndex(item => item.id === productId);
-    
-            if (deletedProductIndex !== -1) {
-                // Create a copy of the previous state
-                const updatedCartItems = [...prev];
-                // Use splice to remove the product at the found index
-                updatedCartItems.splice(deletedProductIndex, 1);
-                // Return the updated state
-                return updatedCartItems;
+            if (data.success === false) {
+                console.log("Can't Add Item Inside Cart");
+
+            } else {
+                setCartItems(data)
             }
-    
-            // Return the previous state if the product is not found
-            return prev;
-        });
+
+        } catch (error) {
+            console.log(error.message)
+        }
     };
-    
-    
-    
-    const addToCart = async (product) => {
-        // console.log("Adding to cart Product is", product.id);
-        SetCartItems((prev) => {
-            const existingProductIndex = prev.findIndex(item => item.id === product.id);
-            if (existingProductIndex !== -1) {
-                const updatedCartItems = [...prev];
-                updatedCartItems[existingProductIndex] = {
-                    ...updatedCartItems[existingProductIndex],
-                    cartValue: updatedCartItems[existingProductIndex].cartValue + 1
-                };
-                return updatedCartItems;
+
+    const addToCart = async (productId,quantity) => {
+        try {
+            const response= await fetch('http://localhost:3000/api/user/cart/add',{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({ userId: currUser._id ,productId,quantity})
+
+            })
+            const data = await response.json();
+            if (!response.ok) {
+                console.error("Error fetching cart data:", data.message || response.statusText);
             }
-            return [...prev, { ...product, cartValue: 1 }];
-        });
+
+            if (data.success === false) {
+                console.log("Can't Add Item Inside Cart");
+
+            } else {
+                setCartItems(data)
+            }
+
+        } catch (error) {
+            console.log(error.message)
+        }
     };
-    
-    const contextValue={all_product,cartItems,SetCartItems,removeFromCart,addToCart,alterCartValue};
-    
+
+
+    const contextValue = {
+        all_product,
+        cartItems,
+        setCartItems,
+        removeFromCart,
+        addToCart,
+        alterCartValue
+    };
+
     return (
         <ShopContext.Provider value={contextValue}>
             {props.children}
         </ShopContext.Provider>
-    )
-}
+    );
+};
 
 export default ShopContextProvider;

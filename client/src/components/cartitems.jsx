@@ -6,7 +6,7 @@ import { AiTwotoneDelete } from "react-icons/ai";
 
 
 export const Cartitems = () => {
-    const { all_product, cartItems, removeFromCart, alterCartValue } = useContext(ShopContext);
+    const { cartItems, removeFromCart, alterCartValue } = useContext(ShopContext);
     const [total, setTotal] = useState(0)
 
 
@@ -14,7 +14,7 @@ export const Cartitems = () => {
         setTotal(() => {
             let sum = 0
             cartItems.map((item) => {
-                sum += item.new_price * item.cartValue
+                sum += item.product.new_price * item.quantity
             })
             return sum;
         })
@@ -41,21 +41,21 @@ export const Cartitems = () => {
                     {!(cartItems.length === 0) &&
                         cartItems.map((item) => (
                             <React.Fragment >
-                                <div id={item.id} key={item.id} className="grid grid-flow-col grid-cols-6 items-center gap-x-5 text-xl font-medium text-slate-700">
-                                    <img src={item.image} alt="" className="h-[90px] rounded-full" />
+                                <div id={item['product']._id} key={item['product']._id} className="grid grid-flow-col grid-cols-6 items-center gap-x-5 text-xl font-medium text-slate-700">
+                                    <img src={item['product'].images[0]} alt="" className="h-[90px] rounded-full" />
                                     <p className="text-slate-500 line-clamp-2">{item.name}</p>
-                                    <p>${item.new_price}</p>
-                                    <select name="Quantity" className="w-16 justify-center bg-slate-100 flex border border-slate-500 items-center rounded-lg" onChange={(e) => alterCartValue(e.target.value, item.id)} >
+                                    <p>${item['product'].new_price}</p>
+                                    <select name="Quantity" className="w-16 justify-center bg-slate-100 flex border border-slate-500 items-center rounded-lg" onChange={(e) => alterCartValue(e.target.value, item.product._id)} >
                                         <option value="1" id="1" >1</option>
                                         <option value="2" id="2">2</option>
                                         <option value="3" id="3">3</option>
                                         <option value="4" id="4">4</option>
-                                        <option value="#" selected hidden>{item.cartValue}</option>
+                                        <option value="#" selected hidden>{item.quantity}</option>
                                     </select>
-                                    <p>${Number(item.new_price)*Number(item.cartValue)}</p>
-                                    <AiTwotoneDelete  onClick={()=>removeFromCart(item.id)} className="m-3 w-[60px] h-[60x] hover:scale-110 hover:fill-red-500 stroke-2"/>
+                                    <p>${Number(item['product'].new_price)*item.quantity}</p>
+                                    <AiTwotoneDelete  onClick={()=>removeFromCart(item.cartId)} className="m-3 w-[60px] h-[60x] hover:scale-110 hover:fill-red-500 stroke-2"/>
                                 </div>
-                                <hr key={`${item.id}-hr`} className="border-1 rounded-md" />
+                                <hr key={`${item['product']._id}-hr`} className="border-1 rounded-md" />
                             </React.Fragment>
                         ))
                     }

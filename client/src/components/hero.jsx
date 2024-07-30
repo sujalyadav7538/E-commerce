@@ -20,7 +20,7 @@ function Hero() {
              </div>
         </div>
         <div className='flex flex-1 justify-center items-center left-0'>
-            <img src={hero_image} alt="" className='h-[200px] w-[200px]'/>
+            <img src={hero_image} alt="" className='h-[500px] w-[500px]'/>
         </div>
     </div>
   )

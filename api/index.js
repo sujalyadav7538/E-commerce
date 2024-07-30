@@ -1,13 +1,15 @@
 import express from "express";
 import DatabaseConnection from "./middlewares/database.js";
 import productRoute from './routes/product.route.js';
-import userRoute from './routes/user.route.js';
 import bodyParser from "body-parser";
+import userRoute from './routes/user.route.js';
+import adminRoute from './routes/admin.route.js';
 import dotenv from "dotenv";
 import upload from './middlewares/multer.js';
 import uploadOnCloud from './utils/cloudinary.js';
 import cookieParser from "cookie-parser";
 import cors from 'cors';
+import  path  from 'path';
 
 dotenv.config({ path: "./.env" });
 
@@ -15,6 +17,8 @@ const app = express();
 
 // Connect to MongoDB Atlas
 await DatabaseConnection();
+
+const __dirname=path.resolve();
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -39,7 +43,6 @@ app.get('/', (req, res) => {
 
 app.get('/api/cookie-tester',(req,res,next)=>{
     try{
-        console.log(req.cookies.access_token)
         if (req.cookies.access_token==undefined){
             return res.json("");
         }
@@ -53,6 +56,15 @@ app.post('*/upload', upload.fields([{ name: 'product_image', maxCount: 6 }]), up
 
 app.use('/api/product', productRoute);
 app.use('/api/user', userRoute);
+app.use('/api/admin',adminRoute)
+
+
+
+app.use(express.static(path.join(__dirname,'/client/dist')));
+
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname,'client','dist','index.html'))
+})
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

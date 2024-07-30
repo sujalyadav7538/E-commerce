@@ -97,7 +97,7 @@ function Navbar() {
           <button>
             {currUser ? (
               <div className="flex gap-10 justify-center items-center">
-                <Link to={`/profile`} className="hover:scale-105">
+                <Link to={`/admin/profile`} className="hover:scale-105">
                   <div className="border border-slate-500  rounded-full p-2 hover:shadow-lg">
                     <FaUser  />
                   </div>

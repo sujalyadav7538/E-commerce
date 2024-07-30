@@ -13,12 +13,14 @@ import kid_banner from "./../public/Assets/banner_kids.png";
 import Product from "./pages/product";
 import Cart from "./pages/cart";
 import { Addproduct } from "./adminSection/addproduct";
-import { ListProduct } from "./adminSection/listProduct";
+import { UpdateProduct } from "./adminSection/updateProduct.jsx";
 import { Login } from "./pages/login.jsx";
 import SingUp from "./pages/singUp.jsx";
 import { Privateroute, Publiceroute } from "./utils/privacy.jsx";
 import { useContext, useEffect } from 'react';
 import { UserContext } from "./context/userContext.jsx";
+import Profile from "./adminSection/profile.jsx";
+import Views from './adminSection/views';
 
 function App() {
   const {currUser,removeUser}=useContext(UserContext);
@@ -61,7 +63,9 @@ function App() {
           <Route element={<Privateroute />}>
             <Route path="/cart" element={<Cart />} />
             <Route path="/admin/addproduct" element={<Addproduct />} />
-            <Route path="/admin/listproduct" element={<ListProduct />} />
+            <Route path="/admin/updateproduct/:id" element={<UpdateProduct />} />
+            <Route path="/admin/profile" element={<Profile />} />
+            <Route path="/admin/views" element={<Views />} />
           </Route>
           <Route element={<Publiceroute />}>
             <Route path="/login" element={<Login />} />
@@ -79,7 +83,7 @@ function App() {
           />
           <Route
             path="/kids"
-            element={<ShopCategory banner={kid_banner} category="kid" />}
+            element={<ShopCategory banner={kid_banner} category="kids" />}
           />
           <Route path="/product/:id" element={<Product />} />
         </Routes>

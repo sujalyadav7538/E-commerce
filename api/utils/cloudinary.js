@@ -8,14 +8,13 @@ cloudinary.v2.config({
     secure: true,
   })
           
-// 
+
 
  const uploadOnCloud = async (req,res,next) => {
     const localFilePath=req.files.product_image;
     // console.log(process.env.CLOUDINARY_API_KEY,process.env.CLOUDINARY_NAME)
     try {
         if (!localFilePath) return null
-        console.log(localFilePath)
         //upload the file on cloudinary
         let imageUrls=[]
         for(let i=0;i<localFilePath.length;i++){
@@ -28,7 +27,6 @@ cloudinary.v2.config({
         res.status(200).json(imageUrls);  
     } catch (error) {
         // fs.unlinkSync(localFilePath) // remove the locally saved temporary file as the upload operation got failed
-        console.log(error)
         next(error);
     }
   }
