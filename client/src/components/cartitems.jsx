@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import React, { createFactory, useContext, useEffect, useRef, useState } from "react";
-import { ShopContext } from "./../context/shopcontext";
+import { ShopContext } from "./../context/shopcontext.js";
 import { AiTwotoneDelete } from "react-icons/ai";
 
 

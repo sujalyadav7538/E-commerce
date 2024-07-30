@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
-import product_14 from "E:/CODES/AI/client/public/Assets/product_14.png";
+import product_14 from "./../../public/Assets/product_14.png";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./../context/userContext.jsx";
 import all_product from './../../public/Assets/all_product';

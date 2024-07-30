@@ -1,6 +1,6 @@
-import hand_icon from 'E:/CODES/AI/client/public/Assets/hand_icon.png';
-import arrow_icon from 'E:/CODES/AI/client/public/Assets/arrow.png';
-import hero_image from 'E:/CODES/AI/client/public/Assets/hero_image.png';
+import hand_icon from './../../public/Assets/hand_icon.png';
+import arrow_icon from './../../public/Assets/arrow.png';
+import hero_image from './../../public/Assets/hero_image.png';
 function Hero() {
   return (
     <div className='h-[100vh] bg-gradient-to-r from-pink-300 via-pink-200 to-pink-400 flex flex-col lg:flex-row'> 

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useRef } from "react";
-import logo from "E:/CODES/AI/client/public/Assets/logo.png";
-import cart_icon from "E:/CODES/AI/client/public/Assets/cart_icon.png";
+import logo from "./../../public/Assets/logo.png";
+import cart_icon from "./../../public/Assets/cart_icon.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../context/shopcontext";

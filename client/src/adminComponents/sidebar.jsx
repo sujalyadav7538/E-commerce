@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
-import add_product from "E:/CODES/AI/client/public/Assets/add_product.png";
-import update_product from "E:/CODES/AI/client/public/Assets/update_product.png";
+import add_product from "./../../public/Assets/add_product.png";
+import update_product from "./../../public/Assets/update_product.png";
 import { FaArrowRight } from "react-icons/fa";
 const Sidebar = () => {
   return (

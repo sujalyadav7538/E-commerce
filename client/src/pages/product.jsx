@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ShopContext } from "../context/shopcontext";
 import Breadcrums from "../components/braedcrums";
 import { ProductDisplay } from "../components/productDisplay";
 import { Descriptionbox } from "../components/descriptionbox";
