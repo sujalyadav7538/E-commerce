@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Serve the index.html file for any unknown routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 app.use((err, req, res, next) => {
