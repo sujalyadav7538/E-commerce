@@ -26,16 +26,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const allowedOrigins = ['http://localhost:5173'];
-app.use(cors({
-    origin: function(origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true  // Enable credentials (cookies, authorization headers, TLS client certificates)
-}));
+app.use(cors());
+//     origin: function(origin, callback) {
+//         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     credentials: true  // Enable credentials (cookies, authorization headers, TLS client certificates)
+// }));
 
 app.get('/', (req, res) => {
     res.send('hello world');
@@ -61,8 +61,10 @@ app.use('/api/admin', adminRoute);
 // Serve static files from the client/dist directory
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+
 // Serve the index.html file for any unknown routes
 app.get('*', (req, res) => {
+    console.log(path.join(__dirname, '../client/dist/index.html'))
     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
@@ -77,5 +79,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3000, () => {
+    console.log(__dirname)
     console.log('Listening on PORT 3000!');
 });
