@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    origin: ['http://localhost:5173','https://e-commerce-1-t31g.onrender.com'], 
     credentials: true,
   }));
 //     origin: function(origin, callback) {
