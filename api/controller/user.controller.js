@@ -180,4 +180,18 @@ export const deleteCartItem=async(req,res,next)=>{
         next(error)
     }
 }
+
+
+export const LogOut = async (req, res, next) => {
+  try {
+    const cookie = req.cookies.access_token;
+    if (cookie) {
+      res.clearCookie('access_token'); // Pass the cookie name, not its value
+    }
+    res.status(200).json({ message: 'Logged out successfully' });
+  } catch (error) {
+    next(error);
+  }
+};
+
   

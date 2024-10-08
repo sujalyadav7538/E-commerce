@@ -35,6 +35,8 @@ export const ShopCategory = ({ banner, category }) => {
     queryCategirocalyProduct();
   }, [category]);
 
+  
+
   return (
     <div className="flex justify-center items-center p-4 ">
       <div className="flex flex-col w-[80%] gap-4">

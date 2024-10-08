@@ -33,7 +33,7 @@ function App() {
           removeUser();
         }
       } catch (error) {
-        console.error('Error fetching token:', error);
+        // console.error('Error fetching token:', error);
         removeUser();
       }
     };
@@ -48,7 +48,7 @@ function App() {
           removeUser();
         }
       } catch (error) {
-        console.error('Error fetching user test:', error);
+        // console.error('Error fetching user test:', error);
         removeUser();
       }
     }, 60 * 10 * 1000);
@@ -56,7 +56,7 @@ function App() {
     return () => clearInterval(intervalId);
   }, [removeUser])
   return (
-    <>
+    <div className="font-serif">
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -89,7 +89,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

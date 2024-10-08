@@ -19,13 +19,13 @@ export const Login = () => {
 
   const {currUser,setUser}=useContext(UserContext);
 
-  const [creating, setCreating] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setCreating(true);
+    setLoading(true);
     try {
       const res = await fetch("http://localhost:3000/api/user/login", {
         method: "POST",
@@ -37,18 +37,17 @@ export const Login = () => {
       });
 
       const data = await res.json();
-      console.log(data);
       if (data.success == false) {
         setError(data.message);
         return;
       }
       setError(null);
       setUser(data);
-      navigate("/home");
+      navigate("/shop");
     } catch (err) {
       setError(err);
     } finally {
-      setCreating(false);
+      setLoading(false);
     }
   };
 
@@ -79,11 +78,11 @@ export const Login = () => {
           <button
             type="submit"
             className={`bg-red-600 text-white w-[450px] p-4 text-xl rounded-lg ${
-              creating ? "bg-gray-400 cursor-not-allowed" : "hover:bg-red-700"
+              loading ? "bg-gray-400 cursor-not-allowed" : "hover:bg-red-700"
             }`}
-            disabled={creating}
+            disabled={loading}
           >
-            {creating ? "logging..." : "Login"}
+            {loading ? "logging..." : "Login"}
           </button>
         </form>
         <p>
