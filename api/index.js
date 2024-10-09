@@ -25,19 +25,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+const allowedOrigins = ['http://localhost:5173', 'https://e-commerce-1-t31g.onrender.com'];
+
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://e-commerce-1-t31g.onrender.com/'],
-    credentials: true,
-  }));
-//     origin: function(origin, callback) {
-//         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//             callback(null, true);
-//         } else {
-//             callback(new Error('Not allowed by CORS'));
-//         }
-//     },
-//     credentials: true  // Enable credentials (cookies, authorization headers, TLS client certificates)
-// }));
+    origin: function (origin, callback) {
+        // Log the incoming origin
+        console.log('Origin:', origin);
+        
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) {
+            console.log('Request has no origin (likely a server-to-server or curl request). Allowing.');
+            return callback(null, true);
+        }
+
+        // Check if the origin is in the allowedOrigins array
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            console.log('Allowed by CORS:', origin);
+            callback(null, true); // Allow the request
+        } else {
+            console.log('Not allowed by CORS:', origin);
+            callback(new Error('Not allowed by CORS')); // Reject the request
+        }
+    },
+    credentials: true, // Enable credentials (cookies, authorization headers, TLS client certificates)
+}));
+
 
 app.get('/', (req, res) => {
     res.send('hello world');
