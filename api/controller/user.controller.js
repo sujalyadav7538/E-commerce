@@ -56,7 +56,6 @@ export const login = async (req, res, next) => {
     }
 };
 
-// Adding Cart Item
 export const addToCart = async (req, res) => {
     const { userId, productId, quantity } = req.body;
   

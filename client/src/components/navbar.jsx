@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import logo from "./../../public/Assets/logo.png";
 import cart_icon from "./../../public/Assets/cart_icon.png";
 import { useState } from "react";
@@ -14,6 +14,21 @@ function Navbar() {
   const { cartItems } = useContext(ShopContext);
   const [toggle, setToggle] = useState(false);
   const { currUser } = useContext(UserContext);
+  const clickedRef=useRef();
+  useEffect(() => {
+    const handleClick = (event) => {
+      console.log(clickedRef.current && clickedRef.current.contains(event.target))
+      if (clickedRef.current && clickedRef.current.contains(event.target)) {
+        setToggle(false);
+      } 
+    };
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [clickedRef,setToggle]);
+
+  console.log(toggle)
 
   return (
     <div className="p-2 px-10 border-b-slate-300 border-2 shadow-lg bg-slate-100 max-md:px-0 items-center">
@@ -35,17 +50,18 @@ function Navbar() {
           onClick={() => setToggle((prev) => !prev)}
         />
         <div
-          className={`flex list-none gap-10 text-xl font-medium  max-md:text-lg max-lg:gap-5 max-md:${
-            toggle ? "visible" : "hidden"
-          } max-md:absolute max-md:justify-center max-md:items-center top-[75px] max-md:w-[100%] max-md:bg-slate-100 max-md:h-[80px]`}
+          className={`flex list-none gap-10 text-xl font-medium  max-md:text-lg max-lg:gap-5 max-md:absolute max-md:justify-center  max-md:items-center top-[75px] max-md:w-[100%] max-md:bg-slate-100 max-md:h-[80px] ${
+            !toggle ? "max-md:hidden" : ""
+          }`}
         >
           <li
             className="cursor-pointer hover:drop-shadow-3xl "
+            ref={clickedRef}
             onClick={() => {
-              setMenu("shop");
+              setMenu("shop");              
             }}
           >
-            <Link to={`/shop`}>Shop</Link>
+            <Link to={`/shop`} >Shop</Link>
             {menu == "shop" ? (
               <hr className="border-none w-auto h-[2px] bg-red-600" />
             ) : (
@@ -54,11 +70,12 @@ function Navbar() {
           </li>
           <li
             className="cursor-pointer hover:drop-shadow-3xl"
+            ref={clickedRef}
             onClick={() => {
               setMenu("mens");
             }}
           >
-            <Link to={`/mens`}>Mens</Link>
+            <Link to={`/mens`} >Mens</Link>
             {menu == "mens" ? (
               <hr className="border-none w-auto h-[2px] bg-red-600" />
             ) : (
@@ -67,11 +84,12 @@ function Navbar() {
           </li>
           <li
             className="cursor-pointer hover:drop-shadow-3xl"
+            ref={clickedRef}
             onClick={() => {
               setMenu("womens");
             }}
           >
-            <Link to={`/womens`}>Womens</Link>
+            <Link to={`/womens`} >Womens</Link>
             {menu == "womens" ? (
               <hr className="border-none w-auto h-[2px] bg-red-600" />
             ) : (
@@ -80,11 +98,12 @@ function Navbar() {
           </li>
           <li
             className="cursor-pointer hover:drop-shadow-3xl"
+            ref={clickedRef}
             onClick={() => {
               setMenu("kids");
             }}
           >
-            <Link to={`/kids`}>Kids</Link>
+            <Link to={`/kids`} >Kids</Link>
             {menu == "kids" ? (
               <hr className="border-none w-auto h-[2px] bg-red-600" />
             ) : (
@@ -99,29 +118,28 @@ function Navbar() {
               <div className="flex gap-10 justify-center items-center">
                 <Link to={`/admin/profile`} className="hover:scale-105">
                   <div className="border border-slate-500  rounded-full p-2 hover:shadow-lg">
-                    <FaUser  />
+                    <FaUser />
                   </div>
                 </Link>
-                <Link to={`/cart`} className="flex ">
-                
-                <img
-                  src={cart_icon}
-                  alt=""
-                  className="cursor-pointer max-md:h-[40px]  max-[460px]:h-[25px] max-[460px]:w-[25px] hover:scale-95"
-                />
-                <div className="w-[22px] h-[22px] flex justify-center items-center -mt-2 -ml-3  font-semibold border rounded-full bg-red-600 text-white z-10">
-                  {Object.keys(cartItems).length}
-                </div>
+                <Link to={`/cart`} className="flex " ref={clickedRef}>
+                  <img
+                    src={cart_icon}
+                    alt=""
+                    className="cursor-pointer max-md:h-[40px]  max-[460px]:h-[25px] max-[460px]:w-[25px] hover:scale-95"
+                  />
+                  <div className="w-[22px] h-[22px] flex justify-center items-center -mt-2 -ml-3  font-semibold border rounded-full bg-red-600 text-white z-10">
+                    {Object.keys(cartItems).length}
+                  </div>
                 </Link>
               </div>
             ) : (
               <>
                 <div className="border borer-2  p-2 border-slate-500 rounded-lg hover:shadow-inner hover:scale-95">
-                  <Link to={`/login`} className="hover:underline">
+                  <Link to={`/login`} className="hover:underline" ref={clickedRef}>
                     Login
                   </Link>
                   <span> / </span>
-                  <Link to={`/singup`} className="hover:underline">
+                  <Link to={`/singup`} className="hover:underline" ref={clickedRef}>
                     SingUp
                   </Link>
                 </div>

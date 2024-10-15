@@ -11,7 +11,7 @@ const Items = ({ item }) => {
       {item && (
         <Link to={`/product/${item._id}`} onclick={scrollTop()} >
         <div className="">
-          <div className="flex max-w-64 md:min-h-[400px] lg:min-h-[480px] min-w-[100px] flex-col gap-4 m-3 shadow-md">
+          <div className="flex max-w-60 md:min-h-[400px] lg:min-h-[480px] min-w-[100px] flex-col gap-4 m-3 shadow-md">
             <img
               src={item.images[0]}
               alt=""

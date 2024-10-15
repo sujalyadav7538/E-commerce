@@ -26,18 +26,17 @@ export const Newcollections = () => {
   return (
     <>
     {data && (
-    <div className='flex flex-col justify-center items-center'>
-        <h1 className='text-3xl flex justify-center p-5'>NEW COLLECTION</h1>
-        <hr className='m-auto  bg-black h-[10px] w-[100px] rounded-lg mb-5'/>
-        <div className='grid grid-cols-4 gap-11'>
-            {data.map((product,index)=>{
-                return <Items key={index} id={product.id} item={product}/>
-            })}
+      <div className=''>
+        <h1 className='text-3xl flex  justify-center p-5'>New Collections</h1>
+        <hr className='m-auto  bg-black h-[10px] w-[100px] rounded-lg'/>
+        <div className='flex justify-center items-center m-5 gap-4'>
+            {data.map((item,index)=>{
+              return <Items key={index}  item={item} />
+              })}
         </div>
 
-    </div>
-
-    )}
+      </div>
+      )}
     </>
   )
 }
