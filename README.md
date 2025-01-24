@@ -10,7 +10,6 @@ This e-commerce application provides a seamless online grocery shopping experien
 - **User-Friendly Interface**: Browse, search, and purchase groceries with ease.
 - **Product Management**: Efficient management of products using MongoDB.
 - **Responsive Design**: Tailwind CSS ensures the application is fully responsive across all devices.
-- **Real-Time Updates**: Integrated Web-Socket for real-time product and inventory updates.
 - **Secure Transactions**: Node.js backend ensures safe and secure data handling.
 - **Efficient Communication**: RESTful APIs connect the front-end and back-end seamlessly.
 
