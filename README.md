@@ -26,8 +26,6 @@ This e-commerce application provides a seamless online grocery shopping experien
 ### **Backend**
 - **Node.js**: Secure and efficient server-side logic.
 - **MongoDB**: NoSQL database for reliable and scalable data management.
-- **Web-Socket**: Enables real-time communication.
-
 ---
 
 ## 📂 Project Glimpses
