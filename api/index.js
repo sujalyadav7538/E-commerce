@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const allowedOrigins = ['http://localhost:5173', 'https://e-commerce-1-t31g.onrender.com'];
+const allowedOrigins = '*';
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -39,7 +39,7 @@ app.use(cors({
         }
 
         // Check if the origin is in the allowedOrigins array
-        if (allowedOrigins.indexOf(origin) !== -1) {
+        if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins==='*') {
             console.log('Allowed by CORS:', origin);
             callback(null, true); // Allow the request
         } else {
