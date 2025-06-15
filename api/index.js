@@ -25,11 +25,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-<<<<<<< HEAD
+
 const allowedOrigins = '*';
-=======
-const allowedOrigins = ['*'];
->>>>>>> aa79927804fdfc6ad5786ba1cd05a504a38e4492
+
 
 app.use(cors({
     origin: function (origin, callback) {
