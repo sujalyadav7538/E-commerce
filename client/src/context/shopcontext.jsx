@@ -15,7 +15,7 @@ const ShopContextProvider = (props) => {
             try {
                 if (!currUser || !currUser._id) return;
 
-                const response = await fetch('http://localhost:3000/api/user/cart/get', {
+                const response = await fetch('https://e-commerce-1-t31g.onrender.com/api/user/cart/get', {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const ShopContextProvider = (props) => {
 
     const alterCartValue = async(quantity, productId) => {
             try {
-                const response = await fetch('http://localhost:3000/api/user/cart/update', {
+                const response = await fetch('https://e-commerce-1-t31g.onrender.com/api/user/cart/update', {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const ShopContextProvider = (props) => {
 
     const removeFromCart = async(cartId) => {
         try {
-            const response= await fetch('http://localhost:3000/api/user/cart/delete',{
+            const response= await fetch('https://e-commerce-1-t31g.onrender.com/api/user/cart/delete',{
                 method:"POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const ShopContextProvider = (props) => {
 
     const addToCart = async (productId,quantity) => {
         try {
-            const response= await fetch('http://localhost:3000/api/user/cart/add',{
+            const response= await fetch('https://e-commerce-1-t31g.onrender.com/api/user/cart/add',{
                 method:"POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -11,7 +11,7 @@ export const UpdateProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       const product = await fetch(
-        `http://localhost:3000/api/product/getProduct/${id}`,
+        `https://e-commerce-1-t31g.onrender.com/api/product/getProduct/${id}`,
         {
           method: "GET",
           headers: {

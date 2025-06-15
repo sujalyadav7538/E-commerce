@@ -12,7 +12,7 @@ export const ShopCategory = ({ banner, category }) => {
     const queryCategirocalyProduct = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/product/getProduct?category=${category}`,
+          `https://e-commerce-1-t31g.onrender.com/api/product/getProduct?category=${category}`,
           {
             method: "GET",
             headers: {

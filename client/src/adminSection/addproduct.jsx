@@ -69,7 +69,7 @@ export const Addproduct = () => {
       imageUrls.append("product_image", localImages[key]);
     }
     try {
-      const data = await fetch("http://localhost:3000/api/product/upload", {
+      const data = await fetch("https://e-commerce-1-t31g.onrender.com/api/product/upload", {
         method: "POST",
         body: imageUrls,
       });
@@ -95,7 +95,7 @@ export const Addproduct = () => {
     setCreating(true);
     formData["size_available"] = quantity;
     try {
-      const res = await fetch("http://localhost:3000/api/admin/create", {
+      const res = await fetch("https://e-commerce-1-t31g.onrender.com/api/admin/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

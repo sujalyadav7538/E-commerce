@@ -36,7 +36,7 @@ export default function SingUp() {
       if (status === false) return setError(mssg);
       ({ status, mssg } = check.checkPassword(user.password));
       if (status === false) return setError(mssg);
-      const res = await fetch("http://localhost:3000/api/user/singup", {
+      const res = await fetch("https://e-commerce-1-t31g.onrender.com/api/user/singup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

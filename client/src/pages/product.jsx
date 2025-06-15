@@ -18,7 +18,7 @@ export default function Product() {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:3000/api/product/getProduct/${params.id}`,
+          `https://e-commerce-1-t31g.onrender.com/api/product/getProduct/${params.id}`,
           {
             method: "GET",
             headers: {

@@ -71,7 +71,7 @@ export default function Views() {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/admin/views?${searchQuery}&startIndex=${page}&search=${search}`,
+          `https://e-commerce-1-t31g.onrender.com/api/admin/views?${searchQuery}&startIndex=${page}&search=${search}`,
           {
             method: "POST",
             headers: {
@@ -136,7 +136,7 @@ export default function Views() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch("http://localhost:3000/api/admin/delete", {
+      const res = await fetch("https://e-commerce-1-t31g.onrender.com/api/admin/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: id }),

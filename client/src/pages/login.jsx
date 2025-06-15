@@ -27,7 +27,7 @@ export const Login = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/user/login", {
+      const res = await fetch("https://e-commerce-1-t31g.onrender.com/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

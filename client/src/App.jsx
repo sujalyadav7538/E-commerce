@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/cookie-tester',{credentials:"include"});
+        const res = await fetch('https://e-commerce-1-t31g.onrender.com/api/cookie-tester',{credentials:"include"});
         const data = await res.json();
         if (!data || data.success === false) {
           removeUser();
@@ -42,7 +42,7 @@ function App() {
 
     const intervalId = setInterval(async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/cookie-tester',{credentials:"include"});
+        const res = await fetch('https://e-commerce-1-t31g.onrender.com/api/cookie-tester',{credentials:"include"});
         const data = await res.json();
         if (!data || data.success === false) {
           removeUser();

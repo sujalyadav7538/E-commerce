@@ -9,7 +9,7 @@ export const RelatedProducts = ({product}) => {
 
   useEffect(()=>{
     const similarProduct=async()=>{
-      const res=await fetch(`http://localhost:3000/api/product/getProduct?category=${product.category}&limit=4`, {
+      const res=await fetch(`https://e-commerce-1-t31g.onrender.com/api/product/getProduct?category=${product.category}&limit=4`, {
         method: 'GET',
         headers: {
           "Content-Type": "application/json",

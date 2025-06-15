@@ -10,7 +10,7 @@ const Sidebar = () => {
   const navigate=useNavigate();
   const handleLogout= async ()=>{
     try {
-      const response=await fetch('http://localhost:3000/api/user/logout',{
+      const response=await fetch('https://e-commerce-1-t31g.onrender.com/api/user/logout',{
         method:'POST',
         headers:{
           'Content-Type':'application/json'
